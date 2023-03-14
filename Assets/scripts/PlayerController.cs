@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
                 {
                     Debug.Log($"Game Over");
                     gameOver = true;
+                    mat.color = Color.red;
                     break;
                 }
             }
