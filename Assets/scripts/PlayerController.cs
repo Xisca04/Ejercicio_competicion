@@ -12,8 +12,8 @@ public class PlayerController : MonoBehaviour
     private float maxX = 10;
     private float minY = -4;
     private float maxY = 6;
-    private float minZ = -7;
-    private float maxZ = 7;
+    private float minZ = -6;
+    private float maxZ = 6;
 
     public bool gameOver;
     public Material mat;
@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public AudioClip _audioclip;
     public TextMeshProUGUI textLives;
     public GameObject restartPanel;
+    public TextMeshProUGUI textPoints;
 
     private void Start()
     {
@@ -32,16 +33,14 @@ public class PlayerController : MonoBehaviour
         lives = 3;
         textLives.text = $"Lives: 3";
         restartPanel.SetActive(false);
+        textPoints.text = $"Points: 0";
 
         StartCoroutine("GenerateNextRandomPos");
 
         mat = GetComponent<MeshRenderer>().material;
     }
 
-    public void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    
 
     private Vector3 GenerateRandomPos()
     {
@@ -83,6 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             mat.color = Color.green;
             points++;
+            textPoints.text = $"Points: {points}";
             hasBeenClick = true;
             _audiosource.PlayOneShot(_audioclip, 1);
         }
