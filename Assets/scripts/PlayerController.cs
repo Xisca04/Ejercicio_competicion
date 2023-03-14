@@ -58,8 +58,11 @@ public class PlayerController : MonoBehaviour
             if (!hasBeenClick)
             {
                 lives--;
+                points -= 5;
                 textLives.text = $"Lives: {lives}";
-                
+                textPoints.text = $"Points: {points}";
+
+
                 if(lives == 0)
                 {
                     Debug.Log($"Game Over");
