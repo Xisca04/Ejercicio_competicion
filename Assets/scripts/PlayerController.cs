@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource _audiosource;
     public AudioClip _audioclip;
     public TextMeshProUGUI textLives;
+    public GameObject restartPanel;
 
     private void Start()
     {
@@ -29,10 +31,16 @@ public class PlayerController : MonoBehaviour
         hasBeenClick = false;
         lives = 3;
         textLives.text = $"Lives: 3";
+        restartPanel.SetActive(false);
 
         StartCoroutine("GenerateNextRandomPos");
 
         mat = GetComponent<MeshRenderer>().material;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private Vector3 GenerateRandomPos()
@@ -58,6 +66,7 @@ public class PlayerController : MonoBehaviour
                     Debug.Log($"Game Over");
                     gameOver = true;
                     mat.color = Color.red;
+                    restartPanel.SetActive(true);
                     break;
                 }
             }
